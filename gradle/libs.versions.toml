@@ -11,13 +11,15 @@ composeBom = "2023.08.00"
 jetbrainsKotlinJvm = "1.9.0"
 appcompat = "1.6.1"
 material = "1.11.0"
-corrutinesKotlin = "1.7.3"
+corrutinesKotlin = "1.8.0"
 retrofitVersion = "2.11.0"
 okhttp = "4.12.0"
 kotlinPlugin = "1.9.0"
 kspVersion = "1.9.0-1.0.12"
 roomVersion = "2.6.1"
-hiltVersion = "2.44"
+hiltVersion = "2.48"
+googleServiceVersion = "4.4.1"
+firebaseBoomVersion = "32.8.0"
 
 
 
@@ -38,7 +40,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-corrutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "corrutinesKotlin" }
+corrutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "corrutinesKotlin" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion"}
 retrofitGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion"}
 okhttp = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp"}
@@ -47,6 +49,8 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx" , version.ref =
 androidx-room-ksp = {group="androidx.room" , name = "room-compile", version.ref = "roomVersion"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
 hilt-ksp = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
+firebaseBom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBoomVersion" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -56,3 +60,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlinPlugin" }
 ksp = { id = "com.google.devtools.ksp",  version.ref = "kspVersion" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref= "hiltVersion" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServiceVersion"}
