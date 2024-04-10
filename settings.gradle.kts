@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "Movie"
 include(":app")
 include(":modules:movie:domain")
+include(":modules:movie:infrastructure")
+include(":modules:movie:ui")
