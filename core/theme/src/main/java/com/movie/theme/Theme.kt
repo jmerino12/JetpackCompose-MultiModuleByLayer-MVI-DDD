@@ -1,4 +1,4 @@
-package com.auth.ui.ui.theme
+package com.movie.theme
 
 import android.app.Activity
 import android.os.Build
@@ -41,7 +41,7 @@ private val LightColorScheme = lightColorScheme(
 fun MovieTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

@@ -55,6 +55,7 @@ dependencies {
 
     implementation(project(":modules:auth:domain"))
     implementation(project(":modules:auth:infrastructure"))
+    implementation(project(":core:theme"))
 
 
     implementation(libs.hilt.android)

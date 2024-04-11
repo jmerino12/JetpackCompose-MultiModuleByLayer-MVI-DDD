@@ -50,9 +50,10 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":core:theme"))
     implementation(project(":modules:movie:domain"))
     implementation(project(":modules:movie:infrastructure"))
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

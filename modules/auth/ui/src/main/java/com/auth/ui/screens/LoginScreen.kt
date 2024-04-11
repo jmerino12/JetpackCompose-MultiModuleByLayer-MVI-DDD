@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.auth.ui.ui.theme.MovieTheme
+import com.movie.theme.MovieTheme
 
 @Composable
 fun LoginScreen() {

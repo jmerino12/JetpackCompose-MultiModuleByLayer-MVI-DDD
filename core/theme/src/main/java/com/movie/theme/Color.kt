@@ -1,4 +1,4 @@
-package com.auth.ui.ui.theme
+package com.movie.theme
 
 import androidx.compose.ui.graphics.Color
 
