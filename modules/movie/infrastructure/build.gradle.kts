@@ -37,6 +37,7 @@ android {
 
 dependencies {
     implementation(project(":modules:movie:domain"))
+    implementation(project(":core:network"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.corrutines)
