@@ -1,10 +1,14 @@
-package com.auth.ui.screens
+package com.auth.ui.screens.login
 
+import com.auth.ui.screens.ViewEvent
+import com.auth.ui.screens.ViewSideEffect
+import com.auth.ui.screens.ViewState
 import com.auth.domain.model.Login as LoginDomain
 
 class LoginContract {
     sealed class Event : ViewEvent {
         data class Login(val login: LoginDomain) : Event()
+        data object Register : Event()
 
     }
 
@@ -14,10 +18,10 @@ class LoginContract {
     ) : ViewState
 
     sealed class Effect : ViewSideEffect {
-        object DataWasLoaded : Effect()
+        //data object DataWasLoaded : Effect()
 
         sealed class Navigation : Effect() {
-            data class ToRepos(val userId: String) : Navigation()
+            data object ToRegister : Navigation()
         }
     }
 }

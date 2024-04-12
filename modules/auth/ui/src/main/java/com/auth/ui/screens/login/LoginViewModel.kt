@@ -1,8 +1,9 @@
-package com.auth.ui.screens
+package com.auth.ui.screens.login
 
 import androidx.lifecycle.viewModelScope
 import com.auth.domain.model.Login
 import com.auth.domain.repositories.AuthRepository
+import com.auth.ui.screens.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,6 +23,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
             is LoginContract.Event.Login -> {
                 login(event.login)
             }
+            is LoginContract.Event.Register -> setEffect { LoginContract.Effect.Navigation.ToRegister }
         }
     }
 
@@ -30,6 +32,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
             setState { copy(isLoading = true, isError = false) }
             try {
                 authRepository.logInWithEmailAndPassword(login)
+                setState { copy(isLoading = false) }
             } catch (e: Exception) {
                 setState { copy(isLoading = false, isError = true) }
             }
