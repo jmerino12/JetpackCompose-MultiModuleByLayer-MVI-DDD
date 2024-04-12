@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.google.services)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 }
@@ -54,9 +55,12 @@ android {
 dependencies {
 
     implementation(project(":modules:auth:ui"))
+    implementation(project(":modules:auth:infrastructure"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.ksp)
+
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -20,6 +20,7 @@ class AuthFirebaseRepository @Inject constructor(
             val token = result.user?.getIdToken(true)?.await()
             Log.v("Login", token?.token.toString())
         } catch (e: Exception) {
+            Log.e("error", e.message.toString())
             throw e
         }
     }

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -41,6 +43,12 @@ android {
 
 dependencies {
     implementation(project(":core:theme"))
+    //implementation(project(":modules:auth:infrastructure"))
+    implementation(project(":modules:auth:domain"))
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.ksp)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

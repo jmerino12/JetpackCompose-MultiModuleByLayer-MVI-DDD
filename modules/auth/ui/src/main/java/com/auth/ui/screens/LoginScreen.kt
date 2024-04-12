@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -26,16 +28,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.auth.domain.model.Login
+import com.movie.theme.MovieAppThemeTypography
 import com.movie.theme.MovieTheme
+import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    state: LoginContract.State,
+    effectFlow: Flow<LoginContract.Effect>?,
+    onEventSent: (event: LoginContract.Event) -> Unit,
+) {
     Scaffold {
         Column(
             modifier = Modifier
@@ -44,72 +54,94 @@ fun LoginScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             var email by remember { mutableStateOf("") }
             var password by remember { mutableStateOf("") }
             val keyboardController = LocalSoftwareKeyboardController.current
 
-            TextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-                modifier = Modifier.fillMaxWidth(fraction = 0.8f)
-            )
+            when {
+                state.isLoading -> CircularProgressIndicator()
+                else -> {
+                    Text(
+                        text = "Movies",
+                        style = MovieAppThemeTypography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
-            TextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Contraseña") },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(onDone = {
-                    keyboardController?.hide()
-                }),
-                modifier = Modifier.fillMaxWidth(fraction = 0.8f)
-            )
+                    TextField(
+                        value = email,
+                        onValueChange = { email = it },
+                        label = { Text("Email") },
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                        modifier = Modifier.fillMaxWidth(fraction = 0.8f)
+                    )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-            TextButton(onClick = { /*TODO*/ }) {
-                Text(text = "Ingresar")
+                    TextField(
+                        value = password,
+                        onValueChange = { password = it },
+                        label = { Text("Contraseña") },
+                        singleLine = true,
+                        visualTransformation = PasswordVisualTransformation(),
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(onDone = {
+                            keyboardController?.hide()
+                        }),
+                        modifier = Modifier.fillMaxWidth(fraction = 0.8f)
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    TextButton(onClick = {
+                        onEventSent(
+                            LoginContract.Event.Login(
+                                Login(
+                                    "jmerino1204@gmail.com",
+                                    "123456789"
+                                )
+                            )
+                        )
+                    }) {
+                        Text(text = "Ingresar")
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Divider(
+                            color = Color.Gray,
+                            modifier = Modifier
+                                .weight(0.3f)
+                                .padding(horizontal = 8.dp)
+                        )
+
+
+                        Text(text = "O", modifier = Modifier.padding(horizontal = 8.dp))
+
+
+                        Divider(
+                            color = Color.Gray,
+                            modifier = Modifier
+                                .weight(0.3f)
+                                .padding(horizontal = 8.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    TextButton(onClick = { /*TODO*/ }) {
+                        Text(
+                            text = "Registrarse",
+                            style = TextStyle(textDecoration = TextDecoration.Underline)
+                        )
+                    }
+                }
             }
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Divider(
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .weight(0.3f)
-                        .padding(horizontal = 8.dp)
-                )
-
-
-                Text(text = "O", modifier = Modifier.padding(horizontal = 8.dp))
-
-
-                Divider(
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .weight(0.3f)
-                        .padding(horizontal = 8.dp)
-                )
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            TextButton(onClick = { /*TODO*/ }) {
-                Text(
-                    text = "Registrarse",
-                    style = TextStyle(textDecoration = TextDecoration.Underline)
-                )
-            }
-
         }
     }
 
@@ -119,6 +151,12 @@ fun LoginScreen() {
 @Composable
 private fun LoginScreenPreview() {
     MovieTheme {
-        LoginScreen()
+        LoginScreen(
+            state = LoginContract.State(
+                false, false
+            ),
+            effectFlow = null,
+            onEventSent = {}
+        )
     }
 }

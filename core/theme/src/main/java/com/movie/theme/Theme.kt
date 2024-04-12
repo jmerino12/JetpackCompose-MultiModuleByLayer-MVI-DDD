@@ -3,7 +3,10 @@ package com.movie.theme
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -36,6 +39,15 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     */
 )
+
+val MovieAppThemeColors: ColorScheme
+    @Composable get() = MaterialTheme.colorScheme
+
+val MovieAppThemeShapes: Shapes
+    @Composable get() = MaterialTheme.shapes
+
+val MovieAppThemeTypography: Typography
+    @Composable get() = MaterialTheme.typography
 
 @Composable
 fun MovieTheme(
