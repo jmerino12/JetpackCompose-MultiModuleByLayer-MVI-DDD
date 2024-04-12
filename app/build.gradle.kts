@@ -53,6 +53,8 @@ android {
 
 dependencies {
 
+    implementation(project(":modules:auth:ui"))
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.ksp)
 
