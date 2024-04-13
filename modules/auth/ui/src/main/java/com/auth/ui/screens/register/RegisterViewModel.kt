@@ -16,6 +16,7 @@ class RegisterViewModel @Inject constructor(private val authRepository: AuthRepo
     override fun setInitialState() = RegisterContract.State(
         isLoading = false,
         isError = false,
+        user = null
     )
 
     override fun handleEvents(event: RegisterContract.Event) {

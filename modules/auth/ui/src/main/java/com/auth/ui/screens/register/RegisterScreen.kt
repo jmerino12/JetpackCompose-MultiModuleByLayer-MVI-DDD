@@ -80,9 +80,9 @@ fun RegisterScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            var username by remember { mutableStateOf("") }
-            var email by remember { mutableStateOf("") }
-            var password by remember { mutableStateOf("") }
+            var username by remember { mutableStateOf("jmerino@merqueo.com") }
+            var email by remember { mutableStateOf("jmerino@merqueo.com") }
+            var password by remember { mutableStateOf("123456789") }
             val keyboardController = LocalSoftwareKeyboardController.current
 
             when {
@@ -164,7 +164,8 @@ private fun RegisterScreenPreview() {
             onNavigationRequested = {},
             state = RegisterContract.State(
                 isLoading = false,
-                isError = false
+                isError = false,
+                user = null
             )
         )
     }

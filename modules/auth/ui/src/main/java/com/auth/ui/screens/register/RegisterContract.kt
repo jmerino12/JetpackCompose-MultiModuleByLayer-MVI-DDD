@@ -1,5 +1,6 @@
 package com.auth.ui.screens.register
 
+import com.auth.domain.model.User
 import com.auth.domain.model.Register as RegisterDomain
 import com.auth.ui.screens.ViewEvent
 import com.auth.ui.screens.ViewSideEffect
@@ -13,6 +14,7 @@ class RegisterContract {
     }
 
     data class State(
+        val user: User?,
         val isLoading: Boolean,
         val isError: Boolean,
     ) : ViewState

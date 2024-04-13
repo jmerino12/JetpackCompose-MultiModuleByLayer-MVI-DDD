@@ -55,7 +55,7 @@ androidx-room-ksp = {group="androidx.room" , name = "room-compile", version.ref 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
 hilt-ksp = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
 firebaseBom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBoomVersion" }
-firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [plugins]

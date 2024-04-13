@@ -55,6 +55,7 @@ android {
 dependencies {
 
     implementation(project(":modules:auth:ui"))
+    implementation(project(":modules:movie:ui"))
     implementation(project(":modules:auth:infrastructure"))
 
     implementation(libs.hilt.android)
