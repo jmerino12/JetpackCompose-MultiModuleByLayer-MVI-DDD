@@ -1,8 +1,8 @@
 package com.example.infrastructure.shared.dependency_injection
 
+import com.core.database.movie.dao.MovieDao
 import com.example.domain.repositories.MovieRepository
 import com.example.infrastructure.NetworkVerify
-import com.example.infrastructure.dao.MovieDao
 import com.example.infrastructure.httpclient.service.MovieService
 import com.example.infrastructure.repository.MovieProxy
 import com.example.infrastructure.repository.MoviesRetrofitRepository
@@ -42,4 +42,9 @@ object MovieInfrastructureModule {
         localRepository: MovieLocalRepository,
         remoteRepository: MovieRemoteRepository
     ): MovieRepository = MovieProxy(localRepository, remoteRepository, NetworkVerify())
+
+    @Provides
+    @Singleton
+    fun providesMovieService(movieRepository: MovieRepository): com.example.domain.services.MovieService =
+        com.example.domain.services.MovieService(movieRepository)
 }

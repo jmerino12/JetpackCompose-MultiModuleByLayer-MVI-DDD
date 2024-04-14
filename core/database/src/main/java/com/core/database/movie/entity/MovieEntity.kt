@@ -1,4 +1,4 @@
-package com.example.infrastructure.entity
+package com.core.database.movie.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

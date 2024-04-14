@@ -26,6 +26,8 @@ import com.auth.ui.screens.register.RegisterContract
 import com.auth.ui.screens.register.RegisterScreen
 import com.auth.ui.screens.register.RegisterViewModel
 import com.movie.ui.screens.MovieScreen
+import com.movie.ui.screens.MoviesContract
+import com.movie.ui.screens.MoviesViewModel
 import com.movie.ui.theme.MovieTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -107,7 +109,14 @@ fun MovieNavGraph(
         }
 
         composable("movie") {
-            MovieScreen()
+            val viewModel = hiltViewModel<MoviesViewModel>()
+            val viewState by viewModel.viewState.collectAsState()
+            MovieScreen(
+                state = viewState,
+                onEventSent = { event -> viewModel.setEvent(event) },
+                effectFlow = viewModel.effect,
+                onNavigationRequested = {}
+            )
         }
     }
 }

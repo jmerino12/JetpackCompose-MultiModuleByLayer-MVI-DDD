@@ -30,3 +30,4 @@ include(":modules:auth:ui")
 include(":core:network")
 include(":core:theme")
 
+include(":core:database")

@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -12,7 +13,11 @@ import javax.inject.Singleton
 private const val BASE_URL = "https://api.themoviedb.org/3/"
 @Module
 @InstallIn(SingletonComponent::class)
-class HttpClientModule {
+object HttpClientModule {
+
+    private val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        this.level = HttpLoggingInterceptor.Level.BODY
+    }
 
     @Provides
     @Singleton
@@ -21,7 +26,8 @@ class HttpClientModule {
     @Provides
     @Singleton
     fun providesHttpClient(): OkHttpClient {
-        return OkHttpClient().newBuilder().build()
+
+        return OkHttpClient().newBuilder().addInterceptor(interceptor).build()
     }
 
 

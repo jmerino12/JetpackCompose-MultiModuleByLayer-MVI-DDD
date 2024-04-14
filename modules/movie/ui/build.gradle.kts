@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -41,6 +43,12 @@ android {
 
 dependencies {
     implementation(project(":core:theme"))
+    implementation(project(":core:database"))
+    implementation(project(":modules:movie:domain"))
+    implementation(project(":modules:movie:infrastructure"))
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.ksp)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

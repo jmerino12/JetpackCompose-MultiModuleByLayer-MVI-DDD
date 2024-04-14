@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrainsKotlinJvm)
+    alias(libs.plugins.ksp)
 }
 
 java {
@@ -10,4 +11,7 @@ java {
 
 dependencies {
     implementation(libs.corrutines)
+    implementation ("com.google.dagger:dagger:2.49")
+    ksp("com.google.dagger:dagger-compiler:2.48")
+
 }

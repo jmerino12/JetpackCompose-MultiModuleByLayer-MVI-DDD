@@ -1,8 +1,8 @@
 package com.example.infrastructure.repository
 
+import com.core.database.movie.dao.MovieDao
 import com.example.domain.model.Movie
 import com.example.infrastructure.anticorruption.MovieTranslate
-import com.example.infrastructure.dao.MovieDao
 import com.example.infrastructure.repository.contracts.MovieLocalRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -1,13 +1,12 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.example.infrastructure"
+    namespace = "com.core.database"
     compileSdk = 34
 
     defaultConfig {
@@ -36,21 +35,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":modules:movie:domain"))
-    implementation(project(":core:network"))
-    implementation(project(":core:database"))
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.corrutines)
-
-    implementation(libs.retrofit)
-    implementation(libs.retrofitGson)
-    implementation(libs.okhttp)
-
-
+    implementation(libs.androidx.room)
+    implementation(libs.androidx.room.ktx)
+    ksp("androidx.room:room-compiler:2.6.1")
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.ksp)
-
-
 }

@@ -1,7 +1,7 @@
 package com.example.infrastructure.anticorruption
 
+import com.core.database.movie.entity.MovieEntity
 import com.example.domain.model.Movie
-import com.example.infrastructure.entity.MovieEntity
 import com.example.infrastructure.httpclient.dto.MovieDto
 
 class MovieTranslate {
