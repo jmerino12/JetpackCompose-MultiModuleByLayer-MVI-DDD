@@ -25,7 +25,7 @@ class UserDataStoreRepository(private val dataStore: DataStore<Preferences>) : U
 
     override fun getUser(): Flow<User> {
         return dataStore.data.map {
-            val date = stringToCalendar(it[USER_BIRTHDAY] ?: "")
+            val date = stringToCalendar(it[USER_BIRTHDAY] ?: "0")
             User(it[USER_NAME] ?: "", email = it[USER_EMAIL] ?: "", birthday = date)
         }
     }
@@ -33,14 +33,13 @@ class UserDataStoreRepository(private val dataStore: DataStore<Preferences>) : U
     override suspend fun saveUser(user: User) {
         dataStore.edit {
             it[USER_NAME] = user.name
-            it[USER_BIRTHDAY] = user.birthday.toString()
+            it[USER_BIRTHDAY] = user.birthday.timeInMillis.toString()
         }
     }
 
     private fun stringToCalendar(date: String): Calendar {
         val cal: Calendar = Calendar.getInstance()
-        val sdf = SimpleDateFormat("", Locale.getDefault())
-        cal.setTime(sdf.parse(date)!!)
+        cal.timeInMillis = date.toLong()
         return cal
     }
 }
