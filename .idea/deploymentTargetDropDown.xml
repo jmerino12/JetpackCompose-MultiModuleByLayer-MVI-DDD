@@ -2,16 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="GreetingPreview">
+      <entry key="UserScreenPreview">
         <State />
       </entry>
       <entry key="app">
-        <State />
-      </entry>
-      <entry key="modules.auth.ui">
-        <State />
-      </entry>
-      <entry key="modules.movie.ui">
         <State />
       </entry>
     </value>

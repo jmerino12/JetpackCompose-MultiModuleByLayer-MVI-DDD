@@ -1,10 +1,13 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+
 }
 
 android {
-    namespace = "com.movie.theme"
+    namespace = "com.user.infrastructure"
     compileSdk = 34
 
     defaultConfig {
@@ -30,18 +33,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.7"
-    }
 }
 
 dependencies {
+
+    implementation(project(":modules:user:domain"))
+    implementation(project(":core:database"))
+
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.material3)
-    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.corrutines)
+
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.ksp)
 
 }

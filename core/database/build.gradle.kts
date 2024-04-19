@@ -40,6 +40,8 @@ dependencies {
     implementation(libs.androidx.room)
     implementation(libs.androidx.room.ktx)
     ksp("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.ksp)

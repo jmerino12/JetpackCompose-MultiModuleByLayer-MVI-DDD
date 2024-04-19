@@ -23,6 +23,10 @@
             <option value="$PROJECT_DIR$/modules/movie/domain" />
             <option value="$PROJECT_DIR$/modules/movie/infrastructure" />
             <option value="$PROJECT_DIR$/modules/movie/ui" />
+            <option value="$PROJECT_DIR$/modules/user" />
+            <option value="$PROJECT_DIR$/modules/user/domain" />
+            <option value="$PROJECT_DIR$/modules/user/infrastructure" />
+            <option value="$PROJECT_DIR$/modules/user/ui" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

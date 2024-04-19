@@ -1,5 +1,8 @@
 package com.movie
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,9 +29,9 @@ import com.auth.ui.screens.register.RegisterContract
 import com.auth.ui.screens.register.RegisterScreen
 import com.auth.ui.screens.register.RegisterViewModel
 import com.movie.ui.screens.MovieScreen
-import com.movie.ui.screens.MoviesContract
 import com.movie.ui.screens.MoviesViewModel
 import com.movie.ui.theme.MovieTheme
+import com.user.ui.screens.QuestionRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,7 +67,7 @@ fun MovieNavGraph(
     LaunchedEffect(state.authState) {
         when (state.authState) {
 
-            AuthState.AUTHENTICATED -> navHostController.navigate("movie") {
+            AuthState.AUTHENTICATED -> navHostController.navigate("user") {
                 popUpTo("login") { inclusive = true }
             }
 
@@ -118,6 +121,12 @@ fun MovieNavGraph(
                 onNavigationRequested = {}
             )
         }
+
+        composable("user") {
+            QuestionRoute(
+                onSurveyComplete = {},
+                onNavUp = navHostController::navigateUp,
+            )
+        }
     }
 }
-

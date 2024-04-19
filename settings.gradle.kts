@@ -31,3 +31,6 @@ include(":core:network")
 include(":core:theme")
 
 include(":core:database")
+include(":modules:user:domain")
+include(":modules:user:infrastructure")
+include(":modules:user:ui")
