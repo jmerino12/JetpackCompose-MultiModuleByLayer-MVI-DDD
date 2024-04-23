@@ -46,6 +46,8 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":modules:movie:domain"))
     implementation(project(":modules:movie:infrastructure"))
+    implementation(project(":modules:user:infrastructure"))
+    implementation(project(":modules:user:domain"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.ksp)

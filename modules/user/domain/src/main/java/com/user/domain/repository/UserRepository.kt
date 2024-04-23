@@ -1,4 +1,4 @@
-package com.user.domain.respository
+package com.user.domain.repository
 
 import com.user.domain.model.User
 import kotlinx.coroutines.flow.Flow

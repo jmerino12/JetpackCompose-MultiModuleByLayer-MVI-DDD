@@ -2,11 +2,24 @@ package com.user.ui.screens
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.user.domain.model.User
+import com.user.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.Calendar
 import javax.inject.Inject
 
 @HiltViewModel
-class UserFormViewModel @Inject constructor(): ViewModel() {
+class UserFormViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
+
+    init {
+        checkIsExistUser()
+    }
 
     private var questionIndex = 0
 
@@ -21,9 +34,13 @@ class UserFormViewModel @Inject constructor(): ViewModel() {
     val userScreenData: UserScreenData?
         get() = _userScreenData.value
 
+    private val _isUser = mutableStateOf(false)
+    val isUser: Boolean
+        get() = _isUser.value
+
 
     //---- Data
-    private val _nameResponse=  mutableStateOf(String())
+    private val _nameResponse = mutableStateOf(String())
     val nameResponse: String
         get() = _nameResponse.value
 
@@ -35,7 +52,6 @@ class UserFormViewModel @Inject constructor(): ViewModel() {
     private val _birthdayResponse = mutableStateOf<Long?>(null)
     val birthdayResponse: Long?
         get() = _birthdayResponse.value
-
 
 
     //Screen conditions
@@ -63,9 +79,30 @@ class UserFormViewModel @Inject constructor(): ViewModel() {
         changeQuestion(questionIndex + 1)
     }
 
+    private fun checkIsExistUser() {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.getUser().collect {
+                _isUser.value = true
+            }
+        }
+    }
+
     fun onDonePressed(onSurveyComplete: () -> Unit) {
-        // Here is where you could validate that the requirements of the survey are complete
-        onSurveyComplete()
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = _birthdayResponse.value!!
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.saveUser(
+                User(
+                    _nameResponse.value,
+                    _emailResponse.value,
+                    calendar
+                )
+            )
+            withContext(Dispatchers.Main) {
+                onSurveyComplete()
+            }
+        }
+
     }
 
     private fun changeQuestion(newQuestionIndex: Int) {
@@ -78,7 +115,7 @@ class UserFormViewModel @Inject constructor(): ViewModel() {
         return when (questionOrder[questionIndex]) {
             UserQuestion.NAME -> _nameResponse.value.isNotEmpty()
             UserQuestion.EMAIL -> _emailResponse.value.isNotEmpty()
-            UserQuestion.BIRTHDAY ->  _birthdayResponse.value != null
+            UserQuestion.BIRTHDAY -> _birthdayResponse.value != null
         }
     }
 

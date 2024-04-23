@@ -124,8 +124,11 @@ fun MovieNavGraph(
 
         composable("user") {
             QuestionRoute(
-                onSurveyComplete = {},
+                onSurveyComplete = {
+                    navHostController.navigate("movie")
+                },
                 onNavUp = navHostController::navigateUp,
+                onMovie = { navHostController.navigate("movie") }
             )
         }
     }

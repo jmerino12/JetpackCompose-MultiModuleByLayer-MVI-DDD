@@ -43,7 +43,10 @@ class AuthFirebaseRepository @Inject constructor(
                 auth.createUserWithEmailAndPassword(register.email, register.password).await()
             val token = result.user?.getIdToken(true)?.await()
             Log.v("AuthFirebaseRepository - Register", token?.token.toString())
-            singIn(Login(register.email, register.password))
+            val updateResult = updateInformation(register)
+            if (updateResult) {
+                singIn(Login(register.email, register.password))
+            }
         } catch (e: Exception) {
             throw e
         }
@@ -68,6 +71,18 @@ class AuthFirebaseRepository @Inject constructor(
         } catch (e: Exception) {
             Log.e("error", e.message.toString())
             throw e
+        }
+    }
+
+    private suspend fun updateInformation(register: Register): Boolean {
+        return try {
+            val profileUpdates = userProfileChangeRequest {
+                displayName = register.username
+            }
+            auth.currentUser!!.updateProfile(profileUpdates).await()
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 

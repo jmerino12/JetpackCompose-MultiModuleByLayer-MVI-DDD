@@ -42,8 +42,13 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.corrutines)
+    implementation(platform(libs.firebaseBom))
+    implementation(libs.firebase.auth)
 
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    implementation("androidx.datastore:datastore-preferences:1.1.0-beta02")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.0")
+    
     implementation(libs.hilt.android)
     ksp(libs.hilt.ksp)
 

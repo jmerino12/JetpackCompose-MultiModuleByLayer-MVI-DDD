@@ -80,7 +80,7 @@ fun RegisterScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            var username by remember { mutableStateOf("jmerino@merqueo.com") }
+            var name by remember { mutableStateOf("Jonathan Meriño") }
             var email by remember { mutableStateOf("jmerino@merqueo.com") }
             var password by remember { mutableStateOf("123456789") }
             val keyboardController = LocalSoftwareKeyboardController.current
@@ -97,9 +97,9 @@ fun RegisterScreen(
                     Spacer(modifier = Modifier.height(24.dp))
 
                     TextField(
-                        value = username,
-                        onValueChange = { username = it },
-                        label = { Text("Username") },
+                        value = name,
+                        onValueChange = { name = it },
+                        label = { Text("Nombre") },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
                         modifier = Modifier.fillMaxWidth(fraction = 0.8f)
@@ -137,7 +137,7 @@ fun RegisterScreen(
                         onEventSent(
                             RegisterContract.Event.Register(
                                 Register(
-                                    username, email, password
+                                    name, email, password
                                 ),
                             )
                         )

@@ -15,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +34,7 @@ import java.util.Calendar
 fun QuestionRoute(
     onSurveyComplete: () -> Unit,
     onNavUp: () -> Unit,
+    onMovie: () -> Unit,
     viewModel: UserFormViewModel = hiltViewModel<UserFormViewModel>()
 ) {
     val surveyScreenData = viewModel.userScreenData ?: return
@@ -43,6 +45,12 @@ fun QuestionRoute(
     BackHandler {
         if (!viewModel.onBackPressed()) {
             onNavUp()
+        }
+    }
+
+    LaunchedEffect(key1 = viewModel, viewModel.isUser) {
+        if (viewModel.isUser) {
+            onMovie()
         }
     }
 
@@ -169,7 +177,6 @@ private fun ShowDatePicker(
         confirmButton = {
             Button(onClick = {
                 state.selectedDateMillis?.let {
-                    println(it)
                     onDateSelected(it)
                 }
                 onDismiss()

@@ -2,8 +2,14 @@ package com.user.infrastructure.shared.dependency_injection
 
 import android.content.Context
 import com.core.database.shared.dataStore
-import com.user.domain.respository.UserRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.user.domain.repository.UserRepository
 import com.user.infrastructure.repositories.UserDataStoreRepository
+import com.user.infrastructure.repositories.UserFirebaseRepository
+import com.user.infrastructure.repositories.UserProxy
+import com.user.infrastructure.repositories.contracts.UserLocalRepository
+import com.user.infrastructure.repositories.contracts.UserRemoteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +21,16 @@ import dagger.hilt.components.SingletonComponent
 object UserModule {
 
     @Provides
-    fun provideLocalInteractionDataSourceImpl(@ApplicationContext context: Context): UserRepository =
+    fun provideUserLocalDatasource(@ApplicationContext context: Context): UserLocalRepository =
         UserDataStoreRepository(context.dataStore)
+
+    @Provides
+    fun provideUserRemoteDataSource(firebaseAuth: FirebaseAuth): UserRemoteRepository =
+        UserFirebaseRepository(firebaseAuth)
+
+    @Provides
+    fun provideUserRepository(
+        remoteRepository: UserRemoteRepository,
+        localRepository: UserLocalRepository
+    ): UserRepository = UserProxy(remoteRepository, localRepository)
 }
